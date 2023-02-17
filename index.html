@@ -1,49 +1,4 @@
-<?php
 
-// konek api dengan menggunakan cURL
-// ini bisa menggunakan lewat console atau terminal tetatapi PHP menyediakan teknik cURL(Client URL)
-// curl bisa get, put dan post
-
-// membuat function agar bisa dipanggil berkali"
-A
-
-function get_CURL($url)
-{
-    $curl = curl_init();
-    curl_setopt($curl, CURLOPT_URL, $url);
-
-    // meminta berupa text atau json
-    curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-    $result = curl_exec($curl);
-    curl_close($curl);
-
-    return json_decode($result, true);
-    // var_dump($result);
-}
-
-
-$url = "https://www.googleapis.com/youtube/v3/channels?key=AIzaSyDGVg6hyktc_b5uiuDDesiwCGJUS8CnWiE&part=snippet,statistics&id=UCRYSsE7L4KpNYhe7MCBU-ZA";
-$result = get_CURL($url);
-
-
-// foto profil youtube
-$youtubeProfilPicture = $result['items'][0]['snippet']['thumbnails']['medium']['url'];
-
-// nama youtube
-$nameYoutube = $result['items'][0]['snippet']['title'];
-
-// jumlah subscriber
-$countSubscribers = $result['items'][0]['statistics']['subscriberCount'];
-
-
-// latest video youtube
-$urlLatest = "https://www.googleapis.com/youtube/v3/search?key=AIzaSyDGVg6hyktc_b5uiuDDesiwCGJUS8CnWiE&part=snippet&channelId=UCRYSsE7L4KpNYhe7MCBU-ZA&maxResult=10&order=date";
-$result = get_CURL($urlLatest);
-$latestVideoYoutube = $result['items'][2]['id']['videoId'];
-// var_dump($latestVideoYoutube);
-
-
-?>
 
 <!doctype html>
 <html lang="en">
